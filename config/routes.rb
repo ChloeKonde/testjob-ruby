@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
-  get 'projects', to: 'project#index', as: 'project/index'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  namespace 'api' do
+    namespace 'v1' do
+      post 'todos', to: 'todos#create', as: 'todos/create'
+      resources :projects do
+        resources :todos
+      end
+    end
+  end
 end
